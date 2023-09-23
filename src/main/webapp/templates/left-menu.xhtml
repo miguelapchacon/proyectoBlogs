@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<f:facet name="header">Créditos #{leftMenuBean.envName}</f:facet>
+	
+	<script>
+		$(document).ready(function() {
+
+   $('.ui-menuitem-link').each(function(){
+       if(window.location.pathname.indexOf($(this).attr('href')) != -1) {
+           $(this).css('background', '#ccd232');//or add class
+       }
+   });  
+
+})
+	
+	</script>
+	
+	
+	
+	
+	<h:form id="leftMenuForm">
+		
+		<input type="hidden" id="id" name="id" value="control_calidad" />
+		<input type="hidden" id="passwd" name="passwd" value="control_calidad" />
+		
+		<p:panelMenu>
+			<c:forEach items="#{leftMenuBean.userModules}" var="module">
+				<p:submenu label="#{module.description}"  expanded="true">
+					<c:if test="#{!empty module.TOptionList}">
+						<c:forEach items="#{module.TOptionList}" var="opt">
+							<c:choose>
+								<c:when test="#{opt.type == 'BIP'}"> 
+									<p:menuitem  url="http://10.100.1.86:9704/xmlpserver${opt.url}" onclick="javascript:$(this).closest('form').attr('action',$(this).attr('href')).attr('target','_blank').submit(); return false;" value="#{opt.description}" />
+								</c:when>
+								<c:when test="#{opt.urlxdo != null}">
+									<p:menuitem  url="#{opt.url}?urlXdo=#{opt.urlxdo}&amp;name=#{opt.nameReport}"  value="#{opt.description}" />									
+								</c:when>
+								<c:otherwise> 
+									<p:menuitem  url="#{opt.url}"  value="#{opt.description}">										
+									</p:menuitem> 
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:if>
+				</p:submenu>
+			</c:forEach>
+			
+			<p:submenu label="Sesión" expanded="true">
+				<p:menuitem url="/logout">Cerrar Sesión</p:menuitem>
+			</p:submenu> 
+		</p:panelMenu>
+
+	</h:form>
+</ui:composition>

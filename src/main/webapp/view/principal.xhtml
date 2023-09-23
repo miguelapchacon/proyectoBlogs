@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<ui:include src="/templates/metadata.xhtml"></ui:include>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+
+
+	
+	<style>
+	.ui-widget-header {
+    border: 1px solid #2c4359;
+    background: #386f46;
+    color: #ffffff;
+    font-weight: bold;
+	}
+	
+	.ui-widget-content {
+	    border: 1px solid #ffffff;
+	    background: #ffffff;
+	    color: #2c4359;
+	    font-weight: 500;
+	}
+	.fuenteLogin{
+	font-size: 14px;
+	}
+	.fuentetbtn{
+	font-size: 12px !important;
+	background: #b94a48 !important;
+    font-weight: bold;
+    color: white !important;
+	
+	}
+	.fuenteEnc{
+	font-size: 50px;
+    margin-left: 14%;
+    margin-top: 0px;
+    color: white;
+    }
+    	.columnClases{
+	width: 30% !important;
+    color: white;
+    }
+	</style>
+	
+	<script>
+	function mostrarContent(pagina){
+	var seleccionado=pagina;
+	if(seleccionado=="Readers"){
+		document.getElementById('readerForm:contentReader').style.display = 'block';
+		document.getElementById('readerForm:contentBlogs').style.display = 'none';		
+		document.getElementById('readerForm:contentReaderBlogs').style.display = 'none';
+		}
+	else if(seleccionado=="Blogs"){
+		document.getElementById('readerForm:contentReader').style.display = 'none';
+		document.getElementById('readerForm:contentBlogs').style.display = 'block';		
+		document.getElementById('readerForm:contentReaderBlogs').style.display = 'none';
+		}	
+			else if(seleccionado=="ReadersB"){
+		document.getElementById('readerForm:contentReader').style.display = 'none';
+		document.getElementById('readerForm:contentBlogs').style.display = 'none';		
+		document.getElementById('readerForm:contentReaderBlogs').style.display = 'block';
+		}	
+}
+	
+	
+	</script>
+		<h:form id="bannerSup" style="border-color: #2c3d55;border-bottom: 1px solid white;">
+		
+			 <h:panelGrid id="panelGridGH" columns="2"  style="background: #2c3d55;width: 100%;">
+			 <h:graphicImage value = "https://www.presidencia.gob.sv/wp-content/uploads/2019/06/LogoPagina_Mesa-de-trabajo-1.png" style="width: 122px;" />
+					<h:outputLabel for="lblbank" value="BANCO DE DESARROLLO DE EL SALVADOR " styleClass="fuenteEnc" /> 
+				 				 </h:panelGrid>
+				
+				 
+				
+	</h:form>
+</h:head>
+<h:body >
+<h:form id="readerForm" styleClass="centered">
+
+<p:panelGrid style="width:100%"> 
+    <f:facet name="header"> 
+        <p:row> 
+            <p:column colspan="2"> 
+            
+            </p:column>
+        </p:row>
+    </f:facet>
+
+    <p:row>
+        <p:column style="width:150px;border-right: 1px solid black;"> 
+           
+ <h:panelGroup id="seccionMenu" styleClass="columnClases">
+       
+        <p:menu>
+            <p:submenu label="Menú Principal">
+                <p:menuitem value="Readers" onclick="mostrarContent('Readers')"
+                            icon="pi pi-save"/>
+                <p:menuitem value="Blogs"   icon="pi pi-refresh" onclick="mostrarContent('Blogs')"/>
+                <p:menuitem value="Readers por blog" icon="pi pi-times" onclick="mostrarContent('ReadersB')"/>
+            </p:submenu>
+        </p:menu>
+</h:panelGroup>
+
+        </p:column>
+        
+        
+        
+        <p:column>
+          <h:panelGroup id="seccionContenido">
+  				<h:panelGroup id="contentReader" style="display: none;">       
+                            <ui:insert name="newContent" >
+                            <ui:include src="/view/readers.xhtml" />
+                        </ui:insert> 
+                </h:panelGroup>        
+                
+                <h:panelGroup id="contentBlogs" style="display: none;">       
+                            <ui:insert name="newContent" >
+                            <ui:include src="/view/blogs.xhtml" />
+                        </ui:insert> 
+                </h:panelGroup>   
+                
+                <h:panelGroup id="contentReaderBlogs" style="display: none;">       
+                            <ui:insert name="newContent" >
+                            <ui:include src="/view/readersbyBlogs.xhtml" />
+                        </ui:insert> 
+                </h:panelGroup>        
+         </h:panelGroup> 
+        </p:column>
+    </p:row>
+
+    <f:facet name="footer" style="color: #2c3d55"> 
+        <p:row>
+          
+        </p:row>
+    </f:facet>
+</p:panelGrid>
+
+ 
+
+
+
+ 
+
+		
+			
+				</h:form>  
+</h:body>
+
+</html>

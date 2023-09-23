@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/1.4/weblogic-web-app">	
+	
+	<context-root>/proectoBlogs</context-root>   
+
+	<container-descriptor>
+		<prefer-application-packages> 
+			<package-name>org.springframework.*</package-name>
+			<package-name>javax.persistence.*</package-name>
+			<package-name>org.eclipse.persistence.*</package-name>
+			<package-name>javax.validation.*</package-name>
+            <package-name>com.fasterxml.jackson.*</package-name>
+			<package-name>com.blogs.bip.*</package-name>
+		</prefer-application-packages>
+	</container-descriptor>	
+	<charset-params> 
+	    <input-charset> 
+	        <resource-path>/*</resource-path> 
+	        <java-charset-name>UTF-8</java-charset-name> 
+	    </input-charset> 
+	</charset-params>
+		
+<!-- 	<fast-swap> -->
+<!-- 		<enabled>true</enabled> -->
+<!-- 	</fast-swap> -->
+
+</weblogic-web-app>
