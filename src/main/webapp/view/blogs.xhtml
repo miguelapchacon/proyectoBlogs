@@ -53,39 +53,113 @@
 			
 <h:form id="blogForm" >
 			
-	
-  <h2 style="color: white;">BLOGS</h2>
-
-<p:panelGrid id="panelGridReaders" columns="2" style="border-color: white;margin-top: 5%;margin-left: 0%;">
+				
+						<p:fieldset legend="Blogs" style="border: 1px solid #3b8cff;width: 20%;border-radius: 8px;">
+						<p:panelGrid id="panelGridBlog" columns="3" style="border-color: white;margin-left: 0%;">
 					
-						<p:spacer /> <p:spacer /> 
+						<p:spacer /> <p:spacer /> <p:spacer /> 
 						
+						<h:outputLabel for="txtTitle" value="Title: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtTitle" required="true" title="Nombre:"  
+							value="#{blogsBean.blogsEle.title}" maxlength="20"
+						requiredMessdescription="Por favor ingrese su nombre del titulo." styleClass="estiloCajas" />
+						 <p:spacer />
+				
+						<h:outputLabel for="txtDesc" value="Description: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtDesc" required="true" title="Description:"  maxlength="100"
+							value="#{blogsBean.blogsEle.description}" 
+						requiredMessdescription="Por favor ingrese el nombre de Blog" styleClass="estiloCajas" />
+						<p:spacer />
+						
+						<p:spacer /> 
+						 <p:panelGrid id="subPanelBlogs" columns="2" style="margin-left: -6%;" >
+						 
+						 <p:commandButton value="#{blogsBean.editing ? 'Actualizar':'Crear'}" icon="ui-icon-disk"
+						 action="#{blogsBean.save}" id="btnCrearBlogs" update="blogForm"
+						  styleClass="fuentetbtn1" />
+					
+						 <p:commandButton value="Cancelar"   icon="ui-icon-cancel"
+						 action="#{blogsBean.clean}" id="btnCancelarBlog"
+						  styleClass="fuentetbtn2" update="blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs
+					principalForm:blogForm:btnEliminarBlogs" />
+					
+					 <p:commandButton value="Eliminar" icon="ui-icon-trash" 
+						 action="#{blogsBean.doDelete}" id="btnEliminarBlogs"
+						 disabled="#{!blogsBean.editing}" style="width: #{blogsBean.editing ? '98%':'93%'}"  
+						  styleClass="fuentetbtn3" update="principalForm:blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs" />
+					
+					</p:panelGrid>
+					
+					<p:spacer /> <p:spacer /> 
+					
+					
+					
+				
+					</p:panelGrid>
+</p:fieldset>
+<p:spacer />
+	<p:spacer /> <p:spacer /> 
+<p:dataTable style="width: 50%"
+		value="#{blogsBean.blogsList}" var="blogv"
+		rows="10" paginator="true" rowsPerPdescriptionTemplate="10,20,30,40,50"
+				paginatorPosition="bottom" widgetVar="wblogsList"
+				selectionMode="single" rowKey="#{blogv.idBlog}"
+				selection="#{blogsBean.blogsSelect}"
+				emptyMessdescription="No se encontraron coincidencias para mostrar"
+				lazy="false">
+				
+				<p:ajax event="rowSelect"
+					listener="#{blogsBean.onRowSelect}"
+					update="principalForm:blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs
+					principalForm:blogForm:btnEliminarBlogs"/> 
+					
+				<p:column headerText="Id blog"
+					sortBy="#{blogv.idBlog}" filterBy="#{blogv.idBlog}" filterStyleClass="estiloFitros"
+					filterMatchMode="startsWith" 
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.idBlog}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Title"
+					sortBy="#{blogv.title}" filterBy="#{blogv.title}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.title}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Description"
+					sortBy="#{blogv.description}" filterBy="#{blogv.description}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.description}" align="center" />
+				</p:column>
+				
+   
+
+</p:dataTable>
+	
+  <h2 style="color: #b94a48;
+    margin: 0;">BLOGS</h2>
+
+<p:panelGrid id="panelGridBlog2" columns="2">
+			
 						<h5>
-						
-Sobre el curso de valoración de empresas
-Subrayado Tiza 3 Azul
-Cuando queremos comprar acciones de una empresa a todos nos surge siempre la misma duda: ¿Estaré comprando a buen precio, o estará demasiado cara? ¿Es una empresa con valor y merece invertir en ella?
+¿Qué es un blog? 
 
-¿Habrá algún método para realizar una valoración de empresas adecuado?
+Mucha gente busca formas de ampliar su presencia en Internet y, aunque una de las estrategias más populares es lanzar un blog, no todo el mundo sabe qué es un blog y para qué sirve.
 
-Por suerte, hay varios que pueden ayudarte a evaluar el precio de las acciones de una compañía y elegir las mejores opciones para tu cartera. 
+Cuando surgieron los blogs, alrededor de 1994, la gente los utilizaba principalmente para compartir su vida personal, incluidas sus experiencias e intereses. Ahora, los blogs se han convertido en una estrategia de marketing online esencial para las empresas y en una de las opciones profesionales más rentables para los particulares.
 
-En este curso de valoración de empresas te enseñamos algunos de los métodos más importantes, como los modelos de descuento, la valoración por múltiplos y el modelo de valoración por activos. Con estos conocimientos, podrás seleccionar las empresas más prometedoras y hacer mejores inversiones en el futuro.
+La interfaz de los blogs ha cambiado mucho con el tiempo. Ahora los blogueros pueden integrar diversos widgets y plugins en sus plataformas, como un feed de redes sociales, un formulario de contacto o un perfil de autor.
 
-Muchas son las empresas, pero pocas las elegidas. Aprende a seleccionar las mejores con lo que verás en este curso.
-
-Valorando Empresas
-
-¿Qué aprenderás?
-Subrayado Tiza 3 Azul
-En este curso de valoración de empresas aprenderás:
-
-A calcular el valor intrínseco.
-Analizar si una empresa está infravalorada o sobrevalorada.
-Los métodos que hay para realizar dichas valoraciones.
-Dónde buscar la información necesaria.
-Cómo interpretar la información financiera recopilada.
-Y aprenderás todo esto de forma fácil y entretenida, con contenido práctico y aplicado 100% al mundo real. Sin paja. Para que lo puedas empezar a utilizar hoy mismo.
+Un blog (o weblog) es un diario online o sitio web informativo dirigido por una persona, grupo o corporación que ofrece contenidos actualizados regularmente 
+	(entradas de blog) sobre un tema. Un blog presenta la información en orden cronológico inverso y está escrito en un estilo conversacional o informal.
 						</h5>
 					
 						<p:spacer /> 

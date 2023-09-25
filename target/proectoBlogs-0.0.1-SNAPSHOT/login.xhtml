@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<ui:include src="/templates/metadata.xhtml"></ui:include>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+
+	<style>
+	.ui-widget-header {
+    border: 1px solid #2c4359;
+    background: #386f46;
+    color: #ffffff;
+    font-weight: bold;
+	}
+	
+	.ui-widget-content {
+	    border: 1px solid #ffffff;
+	    background: #ffffff;
+	    color: #2c4359;
+	    font-weight: 500;
+	}
+	.fuenteLogin{
+	font-size: 14px;
+	}
+	.fuentetbtn{
+	font-size: 13px !important;
+    background: #728739 !important;
+    font-weight: bold;
+    color: white !important;
+	
+	}
+	.fuenteEnc{
+	font-size: 50px;
+    margin-left: 14%;
+    margin-top: 0px;
+    color: white;
+    }
+	</style>
+		<h:form id="bannerSup" style="border-color: #2c3d55;border-bottom: 1px solid white;">
+		
+				  
+				 <h:panelGrid id="panelGridGH" columns="2"  style="background: #2c3d55;border-color: #313945;width: 100%;">
+			 <h:graphicImage value = "https://www.presidencia.gob.sv/wp-content/uploads/2019/06/LogoPagina_Mesa-de-trabajo-1.png" style="width: 122px;" />
+					<h:outputLabel for="lblbank" value="BANCO DE DESARROLLO DE EL SALVADOR " styleClass="fuenteEnc" /> 
+				 				 </h:panelGrid>
+				
+				 
+				
+		</h:form>
+</h:head>
+<h:body style="background-color: #2c3d55;">
+
+	
+			
+			<h:form id="loginForm" styleClass="centered">
+			
+				
+				<h:panelGroup id="panelsup">
+				
+				</h:panelGroup>
+<!-- 			<p:fieldset legend="Iniciar Sesión" style="background: white; width: 23%; border: 3px solid #9fa2a5;    margin-left: 38%; -->
+
+<!--     margin-top: 5%;">     #2c4359  radial-gradient(#313945, transparent)-->
+<h:panelGrid columns="2" >
+
+ 
+
+ 	
+				<p:fieldset style="background: radial-gradient(#00c4ff2b, transparent); width: 23%;
+       margin-left: 0%;
+    margin-top: 9%;border-radius: 0.3em;">
+    <br/>
+					<br/>
+     <h:graphicImage id="bns" value = "https://www.bandesal.gob.sv/wp-content/themes/instituciones/img/LogoBANDESAL_.png" style="width: 100px;margin-left: 31%;" />
+				
+					<p:panelGrid id="panelGrid" columns="2" style="border-color: white;margin-top: 5%;margin-left: 0%;">
+						<f:facet name="header"></f:facet>
+						<p:spacer /> <p:spacer /> 
+						
+						<h:outputLabel for="j_username" value="Usuario: " styleClass="fuenteLogin" /> 
+						<p:inputText id="j_username" required="true" title="Usuario"  
+						requiredMessage="Por favor ingrese su nombre de usuario." style="text-transform: none;box-shadow: none;font-size: 13px" />
+						
+						<h:outputLabel for="j_password" value="Contraseña: " styleClass="fuenteLogin"/>
+						<p:password id="j_password" required="true" title="Contraseña" style="text-transform: none;box-shadow: none;font-size: 13px" 
+						requiredMessage="La contraseña no puede ser vacía." />
+						
+						<p:spacer /> 
+						 <p:spacer /> <p:spacer /> 
+						 <p:commandButton value="Ingresar" id="btnLogin" action="ingresar" styleClass="fuentetbtn" 
+						update="loginForm" ajax="false" />
+					
+						 <p:spacer /> <p:spacer /> 
+<!-- 						<f:facet name="footer"> -->
+<!-- 								<ui:fragment rendered="${!empty securityStatusMessage}"> -->
+<!-- 					                <center>${securityStatusMessage}</center> -->
+<!-- 					            </ui:fragment> -->
+<!-- 						</f:facet> -->
+					</p:panelGrid>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+				</p:fieldset>
+				
+				
+				 <h:graphicImage id="banner" value = "https://www.bandesal.gob.sv/wp-content/uploads/2021/06/banner2.jpg"
+				  style="width: 89%;height: 50%;margin-left: 10%;margin-top: 3%;border-left: 3px solid white;" />
+		
+				
+				
+				</h:panelGrid>
+			</h:form>
+			
+</h:body>
+
+</html>

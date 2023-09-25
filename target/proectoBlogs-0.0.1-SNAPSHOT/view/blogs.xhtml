@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+
+	<ui:include src="/templates/metadata.xhtml"></ui:include>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+
+	
+	<style>
+	.ui-widget-header {
+    border: 1px solid #2c4359;
+    background: #386f46;
+    color: #ffffff;
+    font-weight: bold;
+	}
+	
+	.ui-widget-content {
+	    border: 1px solid #ffffff;
+	    background: #ffffff;
+	    color: #2c4359;
+	    font-weight: 500;
+	}
+	.fuenteLogin{
+	font-size: 14px;
+	}
+	.fuentetbtn{
+	font-size: 12px !important;
+	background: #b94a48 !important;
+    font-weight: bold;
+    color: white !important;
+	
+	}
+	.fuenteEnc{
+	font-size: 50px;
+    margin-left: 14%;
+    margin-top: 0px;
+    color: white;
+    }
+	</style>
+
+</h:head>
+<h:body style="background-color: white;">
+
+	
+			
+<h:form id="blogForm" >
+			
+			<p:growl id="messdescription_blog" showDetail="true" sticky="true" />
+				
+				
+						<p:fieldset legend="Blogs" style="border: 1px solid #3b8cff;width: 20%;border-radius: 8px;">
+						<p:panelGrid id="panelGridBlog" columns="3" style="border-color: white;margin-left: 0%;">
+					
+						<p:spacer /> <p:spacer /> <p:spacer /> 
+						
+						<h:outputLabel for="txtTitle" value="Title: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtTitle" required="true" title="Nombre:"  
+							value="#{blogsBean.blogsEle.title}" 
+						requiredMessdescription="Por favor ingrese su nombre del titulo." styleClass="estiloCajas" />
+						 <p:spacer />
+				
+						<h:outputLabel for="txtDesc" value="Description: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtDesc" required="true" title="Description:"  
+							value="#{blogsBean.blogsEle.description}" 
+						requiredMessdescription="Por favor ingrese el nombre de Blog" styleClass="estiloCajas" />
+						<p:spacer />
+						
+						<p:spacer /> 
+						 <p:panelGrid id="subPanelBlogs" columns="2" style="margin-left: -6%;" >
+						 
+						 <p:commandButton value="#{blogsBean.editing ? 'Actualizar':'Crear'}" icon="ui-icon-disk"
+						 action="#{blogsBean.save}" id="btnCrearBlogs" update="blogForm"
+						  styleClass="fuentetbtn1" />
+					
+						 <p:commandButton value="Cancelar"   icon="ui-icon-cancel"
+						 action="#{blogsBean.clean}" id="btnCancelarBlog"
+						  styleClass="fuentetbtn2" update="blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs
+					principalForm:blogForm:btnEliminarBlogs" />
+					
+					 <p:commandButton value="Eliminar" icon="ui-icon-trash" 
+						 action="#{blogsBean.doDelete}" id="btnEliminarBlogs"
+						 disabled="#{!blogsBean.editing}" style="width: #{blogsBean.editing ? '98%':'93%'}"  
+						  styleClass="fuentetbtn3" update="principalForm:blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs" />
+					
+					</p:panelGrid>
+					
+					<p:spacer /> <p:spacer /> 
+					
+					
+					
+				
+					</p:panelGrid>
+</p:fieldset>
+<p:spacer />
+	<p:spacer /> <p:spacer /> 
+<p:dataTable style="width: 50%"
+		value="#{blogsBean.blogsList}" var="blogv"
+		rows="10" paginator="true" rowsPerPdescriptionTemplate="10,20,30,40,50"
+				paginatorPosition="bottom" widgetVar="wblogsList"
+				selectionMode="single" rowKey="#{blogv.idBlog}"
+				selection="#{blogsBean.blogsSelect}"
+				emptyMessdescription="No se encontraron coincidencias para mostrar"
+				lazy="false">
+				
+				<p:ajax event="rowSelect"
+					listener="#{blogsBean.onRowSelect}"
+					update="principalForm:blogForm:txtTitle  
+					principalForm:blogForm:txtDesc  
+					principalForm:blogForm:btnCrearBlogs
+					principalForm:blogForm:btnEliminarBlogs"/> 
+					
+				<p:column headerText="Id blog"
+					sortBy="#{blogv.idBlog}" filterBy="#{blogv.idBlog}" filterStyleClass="estiloFitros"
+					filterMatchMode="startsWith" 
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.idBlog}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Title"
+					sortBy="#{blogv.title}" filterBy="#{blogv.title}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.title}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Description"
+					sortBy="#{blogv.description}" filterBy="#{blogv.description}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{blogv.description}" align="center" />
+				</p:column>
+				
+   
+
+</p:dataTable>
+	
+  <h2 style="color: #b94a48;
+    margin: 0;">BLOGS</h2>
+
+<p:panelGrid id="panelGridBlog2" columns="2">
+			
+						<h5>
+¿Qué es un blog? 
+
+Mucha gente busca formas de ampliar su presencia en Internet y, aunque una de las estrategias más populares es lanzar un blog, no todo el mundo sabe qué es un blog y para qué sirve.
+
+Cuando surgieron los blogs, alrededor de 1994, la gente los utilizaba principalmente para compartir su vida personal, incluidas sus experiencias e intereses. Ahora, los blogs se han convertido en una estrategia de marketing online esencial para las empresas y en una de las opciones profesionales más rentables para los particulares.
+
+La interfaz de los blogs ha cambiado mucho con el tiempo. Ahora los blogueros pueden integrar diversos widgets y plugins en sus plataformas, como un feed de redes sociales, un formulario de contacto o un perfil de autor.
+
+Un blog (o weblog) es un diario online o sitio web informativo dirigido por una persona, grupo o corporación que ofrece contenidos actualizados regularmente 
+	(entradas de blog) sobre un tema. Un blog presenta la información en orden cronológico inverso y está escrito en un estilo conversacional o informal.
+						</h5>
+					
+						<p:spacer /> 
+
+				
+					</p:panelGrid>
+
+
+			</h:form>
+			
+</h:body>
+
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	   xmlns:repository="http://www.springframework.org/schema/data/repository"
+	   xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    	http://www.springframework.org/schema/tool
+        http://www.springframework.org/schema/tool/spring-tool-4.0.xsd
+    	http://www.springframework.org/schema/tx
+    	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    	http://www.springframework.org/schema/data/jpa
+    	http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+        http://www.springframework.org/schema/data/repository
+        http://www.springframework.org/schema/data/repository/spring-repository.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<context:annotation-config />
+	
+	<bean id="dataSourceSarArca"  class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/ORACLE_SUNNEL" />
+	</bean>
+	<jpa:repositories base-package="com.blogs.repository"
+					  transaction-manager-ref="transactionManagerSarArca"
+					  entity-manager-factory-ref="entityManagerFactorySarArca" />
+	
+	<tx:annotation-driven transaction-manager="transactionManagerSarArca" />
+
+	<bean id="transactionManagerSarArca" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactorySarArca"></property>
+	</bean>
+
+	<bean id="entityManagerFactorySarArca" 
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="blogsUnit" />
+		<property name="dataSource" ref="dataSourceSarArca" />
+		<property name="persistenceXmlLocation"
+				  value="classpath:com/blogs/config/persistence.xml" />
+		<property name="jpaVendorAdapter">
+			<bean
+					class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+				<property name="showSql" value="false" />
+			</bean>
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="eclipselink.weaving" value="false" />
+				<entry key="eclipselink.logging.level" value="SEVERE" />
+				<entry key="eclipselink.cache.shared.default" value="false" />
+			</map>
+		</property>
+	</bean>
+
+	
+	
+
+</beans>

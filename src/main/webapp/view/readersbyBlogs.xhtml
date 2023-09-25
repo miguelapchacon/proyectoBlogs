@@ -51,25 +51,102 @@
 
 	
 			
-			<h:form id="rbForm" styleClass="centered">
+			<h:form id="readyBlogForm" styleClass="centered">
 			
-  <h2 style="color: white;">Readers por Blogs</h2>
+					<p:growl id="message_Reader" showDetail="true" sticky="true" />
+				
+				
+						<p:fieldset legend="Readers por blog" style="border: 1px solid #3b8cff;width: 20%;border-radius: 8px;">
+						<p:panelGrid id="panelGridReadersBlog" columns="3" style="border-color: white;margin-left: 0%;">
+					
+						<p:spacer /> <p:spacer /> <p:spacer /> 
+						
+						<h:outputLabel for="txtReader" value="Reader: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtReader" required="true" title="Reader:"  
+							value="#{readersBlogsBean.readersBlogsEle.idReader}" 
+						requiredMessage="Por favor ingrese su nombre de usuario" styleClass="estiloCajas" />
+						 <p:message for="txtReader"/>
+				
+						<h:outputLabel for="txtBlog" value="Blog: " styleClass="fuenteLogin" /> 
+						<p:inputText id="txtBlog" required="true" title="Blog:"  
+							value="#{readersBlogsBean.readersBlogsEle.idBlog}" 
+						requiredMessage="Por favor ingrese su nombre de usuario." styleClass="estiloCajas" />
+						<p:spacer />
+						
+						<p:spacer /> 
+						 <p:panelGrid id="subPanelReaderBlog" columns="2" style="margin-left: -6%;" >
+						 
+						 <p:commandButton value="#{readersBlogsBean.editing ? 'Actualizar':'Crear'}" icon="ui-icon-disk"
+						 action="#{readersBlogsBean.saveReaderBlogs}" id="btnCrearReaderBlog" 
+						  styleClass="fuentetbtn1" update="readyBlogForm" />
+					
+						 <p:commandButton value="Cancelar"   icon="ui-icon-cancel"
+						 action="#{readersBlogsBean.clean}" id="btnCancelarReaderBlogs"
+						  styleClass="fuentetbtn2" update="principalForm:readyBlogForm:txtReader  
+					principalForm:readyBlogForm:txtBlog  
+					principalForm:readyBlogForm:btnCrearReaderBlog
+					principalForm:readyBlogForm:btnEliminarReaderBlog" />
+					
+					 <p:commandButton value="Eliminar" icon="ui-icon-trash" 
+						 action="#{readersBlogsBean.doDelete}" id="btnEliminarReaderBlog"
+						 disabled="#{!readersBlogsBean.editing}" style="width: #{readersBlogsBean.editing ? '98%':'93%'}"  
+						  styleClass="fuentetbtn3" update="principalForm:readyBlogForm:txtReader  
+					principalForm:readyBlogForm:txtBlog  
+					principalForm:readyBlogForm:btnCrearReaderBlog " />
+					
+					</p:panelGrid>
+					
+					<p:spacer /> <p:spacer /> 
+					
+					
+					
+				
+					</p:panelGrid>
+</p:fieldset>
+<p:spacer />
+	<p:spacer /> <p:spacer /> 
+<p:dataTable style="width: 50%"
+		value="#{readersBlogsBean.readersBlogsList}" var="readerBlogVar"
+		rows="10" paginator="true" rowsPerPageTemplate="10,20,30,40,50"
+				paginatorPosition="bottom" widgetVar="wreadersBlogsList"
+				selectionMode="single" rowKey="#{readerBlogVar.idBlogsReader}"
+				selection="#{readersBlogsBean.readersBlogsSelect}"
+				emptyMessage="No se encontraron coincidencias para mostrar"
+				lazy="false">
+				
+				<p:ajax event="rowSelect"
+					listener="#{readersBlogsBean.onRowSelect}"
+					update="principalForm:readyBlogForm:txtReader  
+					principalForm:readyBlogForm:txtBlog  
+					principalForm:readyBlogForm:btnCrearReaderBlog
+					principalForm:readyBlogForm:btnEliminarReaderBlog"/> 
+					
+				<p:column headerText="Id Reader by blog"
+					sortBy="#{readerBlogVar.idBlogsReader}" filterBy="#{readerBlogVar.idBlogsReader}" filterStyleClass="estiloFitros"
+					filterMatchMode="startsWith" 
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{readerBlogVar.idBlogsReader}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Reader"
+					sortBy="#{reader.idReader}" filterBy="#{reader.idReader}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{readerBlogVar.idReader}" align="center" />
+				</p:column>
+				
+				<p:column headerText="Blog"
+					sortBy="#{readerBlogVar.idBlog}" filterBy="#{readerBlogVar.idBlog}"
+					filterMatchMode="startsWith" filterStyleClass="estiloFitros"
+					filterMaxLength="5" style="width:70px;text-align: center;">
+					<h:outputText value="#{readerBlogVar.idBlog}" align="center" />
+				</p:column>
+				
+   
 
-<h:panelGrid columns="2">
-
-
- 	
-			
-				
-				<div style="background:white;">
-				
-				</div>
-<!-- 				 <h:graphicImage id="banner" value = "https://www.presidencia.gob.sv/wp-content/uploads/2021/01/FulloaBandesal03-1024x635.jpg" -->
-<!-- 				  style="width: 84%;height: 50%;margin-left: 10%;margin-top: 1%;" /> -->
-		
-				
-				
-				</h:panelGrid>
+</p:dataTable>
+					
+						
 			</h:form>
 			
 </h:body>

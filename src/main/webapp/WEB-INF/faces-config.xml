@@ -14,18 +14,30 @@
 		<display-name>Login.xhtml</display-name>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>ingresar</from-outcome>
+			<from-outcome>exito</from-outcome>
 			<to-view-id>/view/principal.xhtml</to-view-id>
 		
 		</navigation-case>
 	</navigation-rule>
-<navigation-rule>
-			<display-name>Principal.xhtml</display-name>
-		<from-view-id>/view/principal.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>cerrarSesion</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
-		
-		</navigation-case>
-	</navigation-rule>
+
+	
+	<managed-bean>
+		<managed-bean-name>readersBean</managed-bean-name>
+		<managed-bean-class>com.blogs.backing.ReadersBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>blogsBean</managed-bean-name>
+		<managed-bean-class>com.blogs.backing.BlogsBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>  
+		<managed-bean-name>readersBlogsBean</managed-bean-name>
+		<managed-bean-class>com.blogs.backing.ReadersBlogsBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+	
 </faces-config>

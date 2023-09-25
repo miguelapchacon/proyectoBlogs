@@ -31,8 +31,8 @@
 	font-size: 14px;
 	}
 	.fuentetbtn{
-	font-size: 12px !important;
-	background: #b94a48 !important;
+	font-size: 13px !important;
+    background: #728739 !important;
     font-weight: bold;
     color: white !important;
 	
@@ -86,7 +86,7 @@
 						<p:spacer /> <p:spacer /> 
 						
 						<h:outputLabel for="j_username" value="Usuario: " styleClass="fuenteLogin" /> 
-						<p:inputText id="j_username" required="true" title="Usuario"  
+						<p:inputText id="j_username" required="true" title="Usuario"  value="#{readersBean.usuario}"
 						requiredMessage="Por favor ingrese su nombre de usuario." style="text-transform: none;box-shadow: none;font-size: 13px" />
 						
 						<h:outputLabel for="j_password" value="Contraseña: " styleClass="fuenteLogin"/>
@@ -94,19 +94,10 @@
 						requiredMessage="La contraseña no puede ser vacía." />
 						
 						<p:spacer /> 
-<!-- 						<h:commandLink value="Ingresar" action="ingresar" styleClass="fuentetbtn"  -->
-						
-<!-- 						 id="logearUser" /> -->
-						 
-						 <p:commandButton value="Ingresar" action="ingresar" styleClass="fuentetbtn" 
+						 <p:spacer /> <p:spacer /> 
+						 <p:commandButton value="Ingresar" id="btnLogin" styleClass="fuentetbtn"  action="#{readersBean.validar}" 
 						update="loginForm" ajax="false" />
-					<p:spacer /> <p:spacer /> 
-					
-						<f:facet name="footer">
-								<ui:fragment rendered="${!empty securityStatusMessage}">
-					                <center>${securityStatusMessage}</center>
-					            </ui:fragment>
-						</f:facet>
+
 					</p:panelGrid>
 					<br/>
 					<br/>

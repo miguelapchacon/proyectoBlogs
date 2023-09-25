@@ -17,8 +17,9 @@
 	
 	<style>
 	.ui-widget-header {
-    border: 1px solid #2c4359;
-    background: #386f46;
+    border: 1px solid #2c4359; 
+    background: #2c3d55 !important;
+/*     background: #3b8cff !important; */
     color: #ffffff;
     font-weight: bold;
 	}
@@ -34,7 +35,7 @@
 	}
 	.fuentetbtn{
 	font-size: 12px !important;
-	background: #b94a48 !important;
+	background: #4c7903 !important;
     font-weight: bold;
     color: white !important;
 	
@@ -49,28 +50,53 @@
 	width: 30% !important;
     color: white;
     }
+    
+    
+    .ui-state-default, .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #93c3cd;
+    background: #255fb0  !important;
+    font-weight: bold;
+    color: #ffffff !important;
+        font-size: 14px !important;
+}
+
+.ui-menu .ui-menuitem-link:target  {
+   background: red !important;
+}
+
+
 	</style>
 	
 	<script>
 	function mostrarContent(pagina){
 	var seleccionado=pagina;
 	if(seleccionado=="Readers"){
-		document.getElementById('readerForm:contentReader').style.display = 'block';
-		document.getElementById('readerForm:contentBlogs').style.display = 'none';		
-		document.getElementById('readerForm:contentReaderBlogs').style.display = 'none';
+		document.getElementById('principalForm:contentReader').style.display = 'block';
+		document.getElementById('principalForm:contentBlogs').style.display = 'none';		
+		document.getElementById('principalForm:contentReaderBlogs').style.display = 'none';
 		}
 	else if(seleccionado=="Blogs"){
-		document.getElementById('readerForm:contentReader').style.display = 'none';
-		document.getElementById('readerForm:contentBlogs').style.display = 'block';		
-		document.getElementById('readerForm:contentReaderBlogs').style.display = 'none';
+		document.getElementById('principalForm:contentReader').style.display = 'none';
+		document.getElementById('principalForm:contentBlogs').style.display = 'block';		
+		document.getElementById('principalForm:contentReaderBlogs').style.display = 'none';
 		}	
 			else if(seleccionado=="ReadersB"){
-		document.getElementById('readerForm:contentReader').style.display = 'none';
-		document.getElementById('readerForm:contentBlogs').style.display = 'none';		
-		document.getElementById('readerForm:contentReaderBlogs').style.display = 'block';
+		document.getElementById('principalForm:contentReader').style.display = 'none';
+		document.getElementById('principalForm:contentBlogs').style.display = 'none';		
+		document.getElementById('principalForm:contentReaderBlogs').style.display = 'block';
 		}	
 }
 	
+	$(document).ready(function() {
+
+   $('.ui-menu .ui-menuitem-link').each(function(){
+       if(window.location.pathname.indexOf($(this).attr('href')) != -1) {
+           $(this).css('background', 'red');//or add class
+       }
+   });  
+
+})
+
 	
 	</script>
 		<h:form id="bannerSup" style="border-color: #2c3d55;border-bottom: 1px solid white;">
@@ -85,9 +111,9 @@
 	</h:form>
 </h:head>
 <h:body >
-<h:form id="readerForm" styleClass="centered">
+<h:form id="principalForm" styleClass="centered">
 
-<p:panelGrid style="width:100%"> 
+<p:panelGrid style="width:100%;"> 
     <f:facet name="header"> 
         <p:row> 
             <p:column colspan="2"> 
@@ -97,14 +123,13 @@
     </f:facet>
 
     <p:row>
-        <p:column style="width:150px;border-right: 1px solid black;"> 
+        <p:column style="width:150px;"> 
            
  <h:panelGroup id="seccionMenu" styleClass="columnClases">
        
-        <p:menu>
+        <p:menu style="border-right: 1px solid #386f46 !important;position: absolute;height: 67% !important;">
             <p:submenu label="Menú Principal">
-                <p:menuitem value="Readers" onclick="mostrarContent('Readers')"
-                            icon="pi pi-save"/>
+                <p:menuitem value="Readers" icon="pi pi-save" onclick="mostrarContent('Readers')"/>
                 <p:menuitem value="Blogs"   icon="pi pi-refresh" onclick="mostrarContent('Blogs')"/>
                 <p:menuitem value="Readers por blog" icon="pi pi-times" onclick="mostrarContent('ReadersB')"/>
             </p:submenu>
@@ -116,7 +141,8 @@
         
         
         <p:column>
-          <h:panelGroup id="seccionContenido">
+          <h:panelGroup id="seccionContenido" style="position: absolute !important;margin-left: 6%;margin-top: 1%;">
+  			
   				<h:panelGroup id="contentReader" style="display: none;">       
                             <ui:insert name="newContent" >
                             <ui:include src="/view/readers.xhtml" />
@@ -138,11 +164,7 @@
         </p:column>
     </p:row>
 
-    <f:facet name="footer" style="color: #2c3d55"> 
-        <p:row>
-          
-        </p:row>
-    </f:facet>
+  
 </p:panelGrid>
 
  

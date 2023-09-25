@@ -10,7 +10,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class SpringAppContextFactory {
 
-	private static ApplicationContext ctxNoCountry = null;
+	private static ApplicationContext appContext = null;
 	private static ApplicationContext ctxOrion = null;											   
 	
 	//Context para Sunnel
@@ -21,19 +21,35 @@ public class SpringAppContextFactory {
 	
 	private static void createInstance(){
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		ctxNoCountry = WebApplicationContextUtils.getWebApplicationContext((ServletContext) context.getContext() );
-//		ctxNoCountry = new ClassPathXmlApplicationContext("/com/siman/creditos/config/app-context-jpa.xml");
+		try {
+			//ctxOrion = WebApplicationContextUtils.getWebApplicationContext((ServletContext) context.getContext() );
+			appContext = new ClassPathXmlApplicationContext("/com/blogs/config/app-context-jpa.xml");
+			System.out.println("llama al appContext");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static ApplicationContext getInstance(){
-		if(ctxNoCountry==null) createInstance();
-		return ctxNoCountry;
+		System.out.println("entro al getInstance");
+		if(appContext==null) createInstance();
+		return appContext;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private static void createInstanceOrion(){
 		try {
 			//ctxOrion = WebApplicationContextUtils.getWebApplicationContext((ServletContext) context.getContext() );
-	 		ctxOrion = new ClassPathXmlApplicationContext("/com/siman/creditos/config/app-context-jpa.xml");
+	 		ctxOrion = new ClassPathXmlApplicationContext("/com/blogs/config/app-context-jpa.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

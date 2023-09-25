@@ -1,0 +1,15 @@
+com\blogs\backing\BlogsBean.class
+com\blogs\security\SecurityContextUtils.class
+com\blogs\entity\Readers.class
+com\blogs\factory\SpringAppContextFactory.class
+com\blogs\backing\ReadersBlogsBean.class
+com\blogs\backing\LoginBean.class
+com\blogs\repository\ReadersBlogsRepository.class
+com\blogs\backing\ReadersBean.class
+com\blogs\entity\Blogs_Readers.class
+com\blogs\utils\RestFullClient.class
+com\blogs\entity\Blogs.class
+com\blogs\repository\ReadersRepository.class
+com\blogs\repository\BlogsRepository.class
+com\blogs\security\UserPrincipal.class
+com\blogs\backing\GenericBackingBean.class
